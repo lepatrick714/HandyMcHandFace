@@ -25,13 +25,13 @@ int main(int argc, char**argv) {
         cvtColor(frame, grayedOut, COLOR_BGR2GRAY);
         imshow("grayedOut", grayedOut);
 
-        GaussianBlur(grayedOut, blurOut, Size(7,7), 1.5, 1.5);
+        GaussianBlur(grayedOut, blurOut, Size(5,5), 1.5, 1.5);
+        blurOut.convertTo(blurOut,-1,.70,25);
         imshow("blurOut", blurOut);
 
-        threshold(blurOut, thresholdOut, 127, 255, THRESH_BINARY_INV);
+        threshold(blurOut, thresholdOut, 100, 130, THRESH_BINARY);
         imshow("thresholdOut", thresholdOut);
-
-        if(waitKey(30) >= 0) break;
+        if(waitKey(30) >= 0)break;
     }
     return 0;
 }
