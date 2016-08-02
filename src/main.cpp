@@ -1,12 +1,15 @@
 #include "opencv2/opencv.hpp"
 #include "opencv2/videoio.hpp"
-
+#include <cstdio>
 using namespace cv;
 
 int main(int argc, char**argv) {
     VideoCapture cap(0);
     if(!cap.isOpened())
+    {
+        printf("No webcam found\n");
         return -1;
+    }
 
     Mat grayedOut;
     Mat blurOut;
