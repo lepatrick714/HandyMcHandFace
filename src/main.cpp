@@ -11,8 +11,7 @@ using namespace cv;
 
 RNG rng(12345);
 
-Mat  drawConvex(Mat img)
-{
+Mat  drawConvex(Mat img) {
     Mat thresh_out = img.clone();
 
     std::vector<std::vector<Point> > contours;
@@ -22,14 +21,12 @@ Mat  drawConvex(Mat img)
 
     std::vector< std::vector<Point> > hull(contours.size());
 
-    for(size_t i =0; i< contours.size();i++)
-    {
+    for(size_t i =0; i< contours.size();i++) {
         convexHull( Mat(contours[i]),hull[i],false);
     }
     Mat drawing = Mat::zeros(thresh_out.size(),CV_8UC3);
 
-    for(size_t i =0; i< contours.size();i++)
-    {
+    for(size_t i =0; i< contours.size();i++) {
         Scalar color = Scalar(rng.uniform(0,255),rng.uniform(0,255),rng.uniform(0,255));
         drawContours(drawing,contours,(int)i,color,1,8,std::vector<Vec4i>(),0,Point());
         drawContours(drawing,hull,(int)i,color,1,8,std::vector<Vec4i>(),0,Point());
@@ -37,35 +34,32 @@ Mat  drawConvex(Mat img)
     return  drawing;
 }
 
-void frameProccessing(Mat& frame)
-{
-     //Grayed out the image
+void frameProccessing(Mat& frame) {
+    //Grayed out the image
     Mat grayedOut;
     Mat blurOut;
     Mat thresholdOut;
 
     cvtColor(frame, grayedOut, COLOR_BGR2GRAY);
 
-     GaussianBlur(grayedOut, blurOut, Size(5,5), 1.5, 1.5);
-     blurOut.convertTo(blurOut,-1,.70,25);
+    GaussianBlur(grayedOut, blurOut, Size(5,5), 1.5, 1.5);
+    blurOut.convertTo(blurOut,-1,.70,25);
 
-     threshold(blurOut, thresholdOut, 100, 130, THRESH_BINARY);
+    threshold(blurOut, thresholdOut, 100, 130, THRESH_BINARY);
 
-     thresholdOut = drawConvex(thresholdOut);
-     imshow("thresholdOut", thresholdOut);
+    thresholdOut = drawConvex(thresholdOut);
+    imshow("thresholdOut", thresholdOut);
 
 }
 
 
 int main(int argc, char**argv) {
     VideoCapture cap(0);
-   if(!cap.isOpened())
+    if(!cap.isOpened())
     {
         printf("No webcam found\n");
         return -1;
     }
-
-
 
     //namedWindow("grayedOut", 1);
     //namedWindow("blurOut", 2);
@@ -76,7 +70,7 @@ int main(int argc, char**argv) {
         cap >> frame;
         if(frame.data !=NULL)
         {
-        frameProccessing(frame);
+            frameProccessing(frame);
         }
         if(waitKey(30) >= 0)break;
     }

@@ -8,9 +8,19 @@
 
 /home/patrick/Desktop/HandyMcHandFace/src/main.cpp
 opencv2/opencv.hpp
-/home/patrick/Desktop/HandyMcHandFace/src/opencv2/opencv.hpp
+-
 opencv2/videoio.hpp
-/home/patrick/Desktop/HandyMcHandFace/src/opencv2/videoio.hpp
+-
+vector
+-
+opencv2/highgui.hpp
+-
+opencv2/imgcodecs.hpp
+-
+opencv2/imgproc.hpp
+-
+cstdio
+-
 
 /home/patrick/opencv/include/opencv/cxcore.h
 opencv2/core/core_c.h
